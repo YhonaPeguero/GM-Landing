@@ -1,6 +1,13 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook, Instagram, Twitter, MapPin, Phone, Mail, Clock } from "lucide-react"
+import { Instagram, MapPin, Phone, Mail, Clock } from "lucide-react"
+
+// SVG de TikTok (si no está en Lucide)
+const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M12.75 2a.75.75 0 0 1 .75.75v12.5a3.25 3.25 0 1 1-3.25-3.25.75.75 0 0 1 0 1.5 1.75 1.75 0 1 0 1.75 1.75V3.5a.75.75 0 0 1 .75-.75Zm4.5 1.5a.75.75 0 0 1 .75.75c0 1.933 1.567 3.5 3.5 3.5a.75.75 0 0 1 0 1.5 5.001 5.001 0 0 1-4.25-2.29V15.25a5.75 5.75 0 1 1-5.75-5.75.75.75 0 0 1 0 1.5 4.25 4.25 0 1 0 4.25 4.25V2.75a.75.75 0 0 1 .75-.75Z" />
+  </svg>
+)
 
 export function Footer() {
   return (
@@ -24,25 +31,22 @@ export function Footer() {
             </p>
             <div className="flex space-x-4 justify-center md:justify-start">
               <a
-                href="#"
-                className="text-gray-300 hover:text-teal-400 transition-colors hover:scale-110 transform inline-block"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-6 w-6" />
-              </a>
-              <a
-                href="#"
+                href="https://www.instagram.com/gmro.pa?utm_source=qr&igsh=OWY3NzVyOXpyNmVu"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-300 hover:text-teal-400 transition-colors hover:scale-110 transform inline-block"
                 aria-label="Instagram"
               >
                 <Instagram className="h-6 w-6" />
               </a>
               <a
-                href="#"
+                href="https://www.tiktok.com/@gmropaymas?_t=ZS-8wAjIyRGd31&_r=1"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-300 hover:text-teal-400 transition-colors hover:scale-110 transform inline-block"
-                aria-label="Twitter"
+                aria-label="TikTok"
               >
-                <Twitter className="h-6 w-6" />
+                <TikTokIcon className="h-6 w-6" />
               </a>
             </div>
           </div>
