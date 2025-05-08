@@ -82,11 +82,13 @@ export function Navbar() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="#hero" onClick={(e) => scrollToSection("hero", e)} className="relative z-10">
-              <div className="relative h-12 w-32 sm:h-14 sm:w-40">
-                <Image src="/images/gm-logo-new.png" alt="GM Logo" fill className="object-contain" priority />
-              </div>
-            </a>
+            {!isMobileMenuOpen && (
+              <a href="#hero" onClick={(e) => scrollToSection("hero", e)} className="relative z-10">
+                <div className="relative h-12 w-32 sm:h-14 sm:w-40">
+                  <Image src="/images/gm-logo-new.png" alt="GM Logo" fill className="object-contain" priority />
+                </div>
+              </a>
+            )}
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
@@ -140,38 +142,44 @@ export function Navbar() {
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              className="md:hidden relative z-50 p-2"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6 text-gray-800" />
-              ) : (
+            {!isMobileMenuOpen && (
+              <button
+                className="md:hidden relative z-50 p-2"
+                onClick={() => setIsMobileMenuOpen(true)}
+                aria-label="Abrir menú"
+              >
                 <Menu className={`h-6 w-6 ${isScrolled ? "text-gray-800" : "text-white"}`} />
-              )}
-            </button>
+              </button>
+            )}
           </div>
         </div>
       </header>
 
       {/* Mobile Menu - Completely separate from header */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-white z-40 md:hidden overflow-y-auto">
-          <div className="flex flex-col min-h-screen pt-24 px-6 pb-8">
+        <div className="fixed inset-0 bg-white z-40 md:hidden overflow-y-auto flex flex-col">
+          {/* Botón X para cerrar menú */}
+          <button
+            className="absolute top-6 right-6 z-50 p-2"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-label="Cerrar menú"
+          >
+            <X className="h-7 w-7 text-gray-800" />
+          </button>
+          <div className="flex flex-col min-h-screen pt-24 px-6 pb-8 flex-1">
             <div className="flex justify-center mb-8">
               <div className="relative h-16 w-48">
                 <Image src="/images/gm-logo-new.png" alt="GM Logo" fill className="object-contain" />
               </div>
             </div>
 
-            <nav className="flex flex-col space-y-4 py-8">
+            <nav className="flex flex-col items-center justify-center flex-1 space-y-4 py-8">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
                   onClick={(e) => scrollToSection(item.sectionId, e)}
-                  className="text-xl font-medium text-gray-800 hover:text-teal-700 transition-colors py-2 px-4 rounded-md hover:bg-gray-50"
+                  className="text-xl font-medium text-gray-800 hover:text-teal-700 transition-colors py-2 px-4 rounded-md hover:bg-gray-50 text-center"
                 >
                   {item.name}
                 </a>

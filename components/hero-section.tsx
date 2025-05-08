@@ -8,21 +8,36 @@ import { useMobile } from "@/hooks/use-mobile"
 export function HeroSection() {
   const [loaded, setLoaded] = useState(false)
   const [videoLoaded, setVideoLoaded] = useState(false)
+  const [videoError, setVideoError] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const isMobile = useMobile()
 
   useEffect(() => {
     setLoaded(true)
 
-    // Ensure video plays automatically
-    if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
-        console.error("Video autoplay failed:", error)
-      })
+    const video = videoRef.current
+    if (!video) return
 
-      videoRef.current.addEventListener("loadeddata", () => {
-        setVideoLoaded(true)
+    const handleVideoLoad = () => {
+      console.log("Video loaded successfully")
+      setVideoLoaded(true)
+      video.play().catch((error) => {
+        console.error("Video autoplay failed:", error)
+        setVideoError(true)
       })
+    }
+
+    const handleVideoError = (error: Event) => {
+      console.error("Video loading error:", error)
+      setVideoError(true)
+    }
+
+    video.addEventListener("loadeddata", handleVideoLoad)
+    video.addEventListener("error", handleVideoError)
+
+    return () => {
+      video.removeEventListener("loadeddata", handleVideoLoad)
+      video.removeEventListener("error", handleVideoError)
     }
   }, [])
 
@@ -34,7 +49,7 @@ export function HeroSection() {
     <section id="hero" className="relative w-full h-screen overflow-hidden">
       {/* Video Background with Fallback */}
       <div className="absolute inset-0 z-0 bg-gray-900">
-        {!videoLoaded && (
+        {(!videoLoaded || videoError) && (
           <div className="absolute inset-0 bg-gradient-to-r from-teal-900 to-gray-900 animate-pulse"></div>
         )}
         <video
@@ -43,21 +58,28 @@ export function HeroSection() {
           muted
           loop
           playsInline
-          className={`object-cover w-full h-full transition-opacity duration-1000 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+          preload="auto"
+          className={`object-cover w-full h-full transition-opacity duration-1000 ${videoLoaded && !videoError ? "opacity-100" : "opacity-0"}`}
         >
-          <source src="/videos/video.mp4" type="video/mp4" />
+          <source src="/video.mp4" type="video/mp4" />
+          Tu navegador no soporta el elemento video.
         </video>
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/50"></div>
       </div>
 
-      {/* Wave Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
+      {/* Wave Overlay Mejorado */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none" style={{ marginBottom: '-2px' }}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          className="w-full block"
+          style={{ display: 'block', width: '100vw', minHeight: '40px' }}
+          preserveAspectRatio="none"
+        >
           <path
-            fill="#ffffff"
-            fillOpacity="1"
-            d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          ></path>
+            d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L0,320Z"
+            fill="#fff"
+          />
         </svg>
       </div>
 
@@ -92,6 +114,10 @@ export function HeroSection() {
               Explorar
               <ArrowRight className="h-5 w-5" />
             </Button>
+          </div>
+
+          <div className="hidden">
+            <span className="text-xs sm:text-sm text-gray-800 font-medium">¿Necesitas ayuda?</span>
           </div>
         </div>
       </div>

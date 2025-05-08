@@ -48,31 +48,31 @@ export function Footer() {
           </div>
 
           <div className="text-center md:text-left">
-            <h3 className="text-xl font-bold mb-6 relative inline-block">
+            <h3 className="text-xl font-bold mb-6 relative inline-block text-left">
               Contacto
               <span className="absolute -bottom-2 left-0 right-0 md:right-auto w-12 h-0.5 bg-teal-500 mx-auto md:mx-0"></span>
             </h3>
             <ul className="space-y-4">
-              <li className="flex items-start group justify-center md:justify-start">
-                <MapPin className="h-5 w-5 text-teal-400 mr-3 mt-1 flex-shrink-0 group-hover:text-pink-400 transition-colors" />
-                <span className="text-gray-300 group-hover:text-white transition-colors">
+              <li className="flex items-center gap-2 group justify-start text-left">
+                <MapPin className="h-5 w-5 min-w-[20px] text-teal-400 flex-shrink-0 group-hover:text-pink-400 transition-colors" />
+                <span className="text-gray-300 group-hover:text-white transition-colors break-words">
                   La Romana, municipio Villa Hermosa, Calle V Centenario esquina de Amín Abel Hasbún.
                 </span>
               </li>
-              <li className="flex items-center group justify-center md:justify-start">
-                <Phone className="h-5 w-5 text-teal-400 mr-3 flex-shrink-0 group-hover:text-pink-400 transition-colors" />
-                <span className="text-gray-300 group-hover:text-white transition-colors">+1 (849) 406-2906</span>
+              <li className="flex items-center gap-2 group justify-start text-left">
+                <Phone className="h-5 w-5 min-w-[20px] text-teal-400 flex-shrink-0 group-hover:text-pink-400 transition-colors" />
+                <span className="text-gray-300 group-hover:text-white transition-colors break-words">+1 (849) 406-2906</span>
               </li>
-              <li className="flex items-center group justify-center md:justify-start">
-                <Mail className="h-5 w-5 text-teal-400 mr-3 flex-shrink-0 group-hover:text-pink-400 transition-colors" />
-                <span className="text-gray-300 group-hover:text-white transition-colors">info@gmclothing.com</span>
+              <li className="flex items-center gap-2 group justify-start text-left">
+                <Mail className="h-5 w-5 min-w-[20px] text-teal-400 flex-shrink-0 group-hover:text-pink-400 transition-colors" />
+                <span className="text-gray-300 group-hover:text-white transition-colors break-words">info@gmclothing.com</span>
               </li>
-              <li className="flex items-start group justify-center md:justify-start">
-                <Clock className="h-5 w-5 text-teal-400 mr-3 mt-1 flex-shrink-0 group-hover:text-pink-400 transition-colors" />
-                <span className="text-gray-300 group-hover:text-white transition-colors">
+              <li className="flex items-center gap-2 group justify-start text-left">
+                <Clock className="h-5 w-5 min-w-[20px] text-teal-400 flex-shrink-0 group-hover:text-pink-400 transition-colors" />
+                <span className="text-gray-300 group-hover:text-white transition-colors break-words">
                   Lun - Vie: 8:00 AM - 6:00 PM
                   <br />
-                  Sáb: No laboral
+                  Sáb: <span className="font-semibold">No laboral</span>
                   <br />
                   Dom: 8:00 AM - 12:00 PM
                 </span>

@@ -57,14 +57,8 @@ export function FloatingWhatsApp() {
       )}
 
       {/* Hover Tooltip */}
-      {!isOpen && (
-        <div
-          className={`
-            flex items-center 
-            ${isHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"} 
-            transition-all duration-300 ease-in-out mb-2 bg-white rounded-full shadow-lg pr-3 sm:pr-4 pl-2 py-1.5 sm:py-2
-          `}
-        >
+      {!isOpen && isHovered && (
+        <div className="flex items-center transition-all duration-300 ease-in-out mb-2 bg-white rounded-full shadow-lg pr-3 sm:pr-4 pl-2 py-1.5 sm:py-2">
           <span className="text-xs sm:text-sm text-gray-800 font-medium">¿Necesitas ayuda?</span>
         </div>
       )}
